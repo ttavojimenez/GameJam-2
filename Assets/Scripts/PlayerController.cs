@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Player Controller Settings")]
     private CharacterController characterController;
+    private Animator animator;
     private float turnSmoothVelocity;
     private Vector3 velocity;
 
@@ -17,6 +19,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -49,6 +52,9 @@ public class PlayerController : MonoBehaviour
             // Mover al jugador
             characterController.Move(moveDir.normalized * speed * Time.deltaTime);
         }
+
+
+        animator.SetFloat("Velocity", direction.magnitude);
 
         // Aplicar el movimiento de gravedad
         characterController.Move(new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime);
