@@ -20,6 +20,11 @@ public class Stocktaking : MonoBehaviour
     {
         foods = new string[4];
         playerController = GetComponent<PlayerController>();
+        
+        foreach (GameObject foodStock in foodsStockList)
+        {
+            DisableChildsStock(foodStock);
+        }
     }
 
     private void Update()
@@ -30,6 +35,23 @@ public class Stocktaking : MonoBehaviour
     public bool GetFull()
     {
         return foods.All(f => !string.IsNullOrEmpty(f));
+    }
+
+    //Desabilita toda la comida dentro del espacio
+    public void DisableChildsStock(GameObject obj)
+    {
+        Transform[] childs = obj.GetComponentsInChildren<Transform>();
+
+        if (childs.Length > 0)
+        {
+            foreach (Transform child in childs)
+            {
+                if (child != obj.transform)
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+        }  
     }
 
     //Añade la comida al inventario
@@ -52,7 +74,7 @@ public class Stocktaking : MonoBehaviour
         if (!GetFull() && currentFood != null && Input.GetKeyDown(KeyCode.E))
         {
             Debug.Log("Selecciono la comida: " + currentFood.name);
-            StartCoroutine(playerController.CorrutineAnim("ItsPicking"));
+            StartCoroutine(playerController.CoroutineAnim("ItsPicking"));
             AddFood(currentFood.name);
             currentFood = null;
         }

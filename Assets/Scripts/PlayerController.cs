@@ -10,8 +10,10 @@ public class PlayerController : MonoBehaviour
     private Animator animator;
     private float turnSmoothVelocity;
     private Vector3 velocity;
+    private bool isRunning;
 
-    public float speed = 5f;
+    public float walkSpeed = 2f;
+    public float runSpeed = 4f;
     public float turnSmoothTime = 0.1f;
     public Transform cameraPlayer;
     public float gravity = -9.81f;
@@ -40,6 +42,9 @@ public class PlayerController : MonoBehaviour
 
         Vector3 direction = new Vector3(movX, 0f, movZ).normalized;
 
+        isRunning = Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        float currentSpeed = isRunning ? runSpeed : walkSpeed;
+
         if (direction.magnitude >= 0.1f && !Stocktaking.isTakeFood)
         {
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraPlayer.eulerAngles.y;
@@ -50,18 +55,24 @@ public class PlayerController : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             // Mover al jugador
-            characterController.Move(moveDir.normalized * speed * Time.deltaTime);
+            characterController.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
         }
 
-        animator.SetFloat("Velocity", direction.magnitude);
+        ActiveAnimationVelocity(isRunning, direction);
 
         // Aplicar el movimiento de gravedad
         characterController.Move(new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime);
     }
 
+    private void ActiveAnimationVelocity(bool isRunning, Vector3 direction)
+    {
+        float animationSpeed = isRunning ? direction.magnitude * 2 : direction.magnitude;
+        animator.SetFloat("Velocity", animationSpeed);
+    }
+
 
     //Ejecuta los estados de animacion para tomar comida
-    public IEnumerator CorrutineAnim(string animName)
+    public IEnumerator CoroutineAnim(string animName)
     {
         animator.SetBool(animName, true);
         Stocktaking.isTakeFood = true;
