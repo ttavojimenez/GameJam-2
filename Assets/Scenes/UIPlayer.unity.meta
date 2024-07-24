@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/UIPlayer.unity.meta
 guid: 799b977c227b9d0499b0858881f4290f
+========
+guid: c558d63a19c6439499deaeb83811151b
+>>>>>>>> main:Assets/Scenes/AnimalTest.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
