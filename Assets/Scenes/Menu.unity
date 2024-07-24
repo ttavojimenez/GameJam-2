@@ -2264,11 +2264,6 @@ Transform:
   m_Father: {fileID: 576087672}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &845793774 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1839704730853851207, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
-  m_PrefabInstance: {fileID: 4781407487306540498}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &851824484
 GameObject:
   m_ObjectHideFlags: 0
@@ -4822,10 +4817,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1839704730853851204, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
-      propertyPath: stocktaking
-      value: 
-      objectReference: {fileID: 5807068320601128759}
-    - target: {fileID: 1839704730853851204, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
       propertyPath: cameraPlayer
       value: 
       objectReference: {fileID: 427217037}
@@ -4833,10 +4824,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 1839704730853851207, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
+    - target: {fileID: 5807068320601128759, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
+      propertyPath: foodsStockList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1360653949}
+    - target: {fileID: 5807068320601128759, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
+      propertyPath: foodsStockList.Array.data[1]
+      value: 
+      objectReference: {fileID: 1820971406}
+    - target: {fileID: 5807068320601128759, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
+      propertyPath: foodsStockList.Array.data[2]
+      value: 
+      objectReference: {fileID: 2078707759}
+    - target: {fileID: 5807068320601128759, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
+      propertyPath: foodsStockList.Array.data[3]
+      value: 
+      objectReference: {fileID: 1480225882}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
 --- !u!4 &5807068320601128751 stripped
@@ -4844,21 +4847,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1354493974971554557, guid: 9e5716f743e3b0d4784f46144a9ef345, type: 3}
   m_PrefabInstance: {fileID: 4781407487306540498}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5807068320601128759
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 845793774}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8eef917e16aa90b4884764919d0c0edb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  foods: []
-  foodsStockList:
-  - {fileID: 1360653949}
-  - {fileID: 1820971406}
-  - {fileID: 2078707759}
-  - {fileID: 1480225882}
