@@ -29,6 +29,8 @@ public class AnimalController : MonoBehaviour
     private Vector3 minScale = new Vector3(0.4f, 0.4f, 0.4f);
     private float scaleIncrement;
 
+    private Transform player;
+
     private void Start()
     {
         if (transform.childCount > 0)
@@ -52,6 +54,8 @@ public class AnimalController : MonoBehaviour
             }
 
             scaleIncrement = (initialScale.x - minScale.x) / 6f;
+
+            player = GameObject.FindGameObjectWithTag("Player").transform;
         }
     }
 
@@ -60,6 +64,12 @@ public class AnimalController : MonoBehaviour
         if (life < 100)
         {
             OrderFood();
+        }
+
+        if (player != null)
+        {
+            animalChild.transform.LookAt(player);
+            spriteHungry.transform.LookAt(player);
         }
     }
 
