@@ -6,10 +6,6 @@ TagManager:
   tags:
   - Food
   - Animal
-  - PowerUp
-  - Watermelon
-  - Apple
-  - Banana
   layers:
   - Default
   - TransparentFX
