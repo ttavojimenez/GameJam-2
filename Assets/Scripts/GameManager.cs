@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
 
         if (allAnimalsHaveLife100)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(2);
         }
     }
 

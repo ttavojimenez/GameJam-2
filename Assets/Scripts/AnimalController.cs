@@ -90,7 +90,7 @@ public class AnimalController : MonoBehaviour
 
         if (lifeAttempts <= 0)
         {
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene(3);
         }
     }
 

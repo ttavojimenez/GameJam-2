@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
 private void PlayerMovement()
 {
     // Asegurar que se mantenga en el suelo
-    velocity.y = -9.81f;
+    velocity.y = -2f;
 
     // Aplicar gravedad
     velocity.y += gravity * Time.deltaTime;
@@ -51,20 +51,24 @@ private void PlayerMovement()
         float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg + cameraPlayer.eulerAngles.y;
         float angle = Mathf.SmoothDampAngle(transform.eulerAngles.y, targetAngle, ref turnSmoothVelocity, turnSmoothTime);
 
+        // Crear el vector de movimiento
         Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        
+        // Normalizar el vector de movimiento
+        moveDir.Normalize();
 
+        // Aplicar la rotación
         transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         // Mover al jugador
-        characterController.Move(moveDir.normalized * currentSpeed * Time.deltaTime);
+        characterController.Move(moveDir * currentSpeed * Time.deltaTime);
     }
-    
+
     ActiveAnimationVelocity(isRunning, direction);
 
     // Aplicar el movimiento de gravedad
     characterController.Move(new Vector3(velocity.x, velocity.y, velocity.z) * Time.deltaTime);
 }
-
 
     private void ActiveAnimationVelocity(bool isRunning, Vector3 direction)
     {
