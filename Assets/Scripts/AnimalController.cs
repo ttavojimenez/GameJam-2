@@ -23,7 +23,7 @@ public class AnimalController : MonoBehaviour
     // Nueva bandera para evitar que la corutina se inicie repetidamente
     private bool isHungryRoutineRunning = false;
 
-    // Guardar el tamaño inicial y el tamaño objetivo
+    // Guardar el tamaï¿½o inicial y el tamaï¿½o objetivo
     private Vector3 initialScale;
     private Vector3 targetScale = new Vector3(1f, 1f, 1f);
     private Vector3 minScale = new Vector3(0.4f, 0.4f, 0.4f);
@@ -69,7 +69,7 @@ public class AnimalController : MonoBehaviour
         if (player != null)
         {
             animalChild.transform.LookAt(player);
-            spriteHungry.transform.LookAt(player);
+            //spriteHungry.transform.LookAt(player);//
         }
     }
 
@@ -81,7 +81,7 @@ public class AnimalController : MonoBehaviour
         {
             isHungry = true;
             spriteHungry.SetActive(true);
-            // Solo inicia la corutina si no está ya en ejecución
+            // Solo inicia la corutina si no estï¿½ ya en ejecuciï¿½n
             if (!isHungryRoutineRunning)
             {
                 StartCoroutine(StartRoutineHungry());
@@ -139,5 +139,10 @@ public class AnimalController : MonoBehaviour
         animator.SetBool("AlmostDie", false);
         animator.SetBool("Hungry", false);
         isHungryRoutineRunning = false; // Reinicia la bandera al finalizar la corutina
+    }
+
+    public int GetLife()
+    {
+        return life;
     }
 }

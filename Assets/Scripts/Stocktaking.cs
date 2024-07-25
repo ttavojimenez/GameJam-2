@@ -67,12 +67,12 @@ public class Stocktaking : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Índice fuera de rango: " + index);
+            Debug.LogWarning("ï¿½ndice fuera de rango: " + index);
         }
 
     }
 
-    //Añade la comida al inventario
+    //Aï¿½ade la comida al inventario
     public void AddFood(string nameFood)
     {
         for (int i = 0; i < foods.Length; i++)
@@ -112,7 +112,6 @@ public class Stocktaking : MonoBehaviour
     {
         if (!GetFull() && currentFood != null && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Selecciono la comida: " + currentFood.tag);
             StartCoroutine(playerController.CoroutineAnim("ItsPicking"));
             AddFood(currentFood.tag);
             currentFood = null;
@@ -127,7 +126,6 @@ public class Stocktaking : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Alpha1))
             {
                 keyPressDeliverFood = 0;
-                Debug.Log(keyPressDeliverFood);
                 DeliverFoodToTheAnimal(keyPressDeliverFood, currentAnimal.typeFood);
                 currentAnimal = null;
 
@@ -169,11 +167,12 @@ public class Stocktaking : MonoBehaviour
         {
             if (foods[keyFood] != null && !foods[keyFood].Equals("N/A"))
             {
-                if (foods[keyFood].Equals(typeFoodAnimal))
+                if (foods[keyFood].Equals(typeFoodAnimal) || foods[keyFood].Equals("PowerUp"))
                 {
                     if (currentAnimal.isHungry)
                     {
                         currentAnimal.ReceiveFood();
+                        StartCoroutine(playerController.CoroutineAnim("ItsDropping"));
                         DeleteFood(keyFood);
                     }
                 }
