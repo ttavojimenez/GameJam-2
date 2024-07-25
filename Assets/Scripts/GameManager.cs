@@ -15,18 +15,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        /*if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (isPaused)
-            {
-                ResumeGame();
-            }
-            else
-            {
-                PauseGame();
-            }
-        }*/
-
         allAnimalsHaveLife100 = true;
 
         foreach (AnimalController animal in animals)
@@ -54,5 +42,10 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1;
         isPaused = false;
+
+        // Ocultar el cursor
+        Cursor.visible = false;
+        // Bloquear el cursor en el centro de la pantalla
+        Cursor.lockState = CursorLockMode.Locked;
     }
 }

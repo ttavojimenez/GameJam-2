@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -21,6 +20,11 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        // Ocultar el cursor
+        Cursor.visible = false;
+        // Bloquear el cursor en el centro de la pantalla
+        Cursor.lockState = CursorLockMode.Locked;
+
         characterController = GetComponent<CharacterController>();
         animator = GetComponent<Animator>();
     }
@@ -28,6 +32,12 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         PlayerMovement();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Cursor.visible = true;
+            Cursor.lockState= CursorLockMode.None;
+        }
     }
 
 private void PlayerMovement()
