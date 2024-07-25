@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [Header("Player Controller Settings")]
     private CharacterController characterController;
     private Animator animator;
+    private bool isAnimating = false;
     private float turnSmoothVelocity;
     private Vector3 velocity;
     private bool isRunning;
@@ -32,7 +33,7 @@ public class PlayerController : MonoBehaviour
     private void PlayerMovement()
     {
         // Asegurar que se mantenga en el suelo
-        velocity.y = -2f;
+        velocity.y = -9.81f;
 
         // Aplicar gravedad
         velocity.y += gravity * Time.deltaTime;
@@ -74,10 +75,15 @@ public class PlayerController : MonoBehaviour
     //Ejecuta los estados de animacion para tomar comida
     public IEnumerator CoroutineAnim(string animName)
     {
+        if (isAnimating) yield break;  // Si ya está en curso, no hacer nada
+        isAnimating = true;
+
         animator.SetBool(animName, true);
         Stocktaking.isTakeFood = true;
         yield return new WaitForSeconds(5f);
         animator.SetBool(animName, false);
         Stocktaking.isTakeFood = false;
+
+        isAnimating = false;
     }
 }

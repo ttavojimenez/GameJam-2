@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2853482757323472804}
   - component: {fileID: 1531257033945350437}
   - component: {fileID: 6691868315088529852}
-  - component: {fileID: 8616941739329318360}
+  - component: {fileID: 5477348747419220157}
   m_Layer: 0
   m_Name: Bench_1
   m_TagString: Untagged
@@ -29,6 +29,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -52,6 +53,7 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -82,8 +84,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &8616941739329318360
-MeshCollider:
+--- !u!65 &5477348747419220157
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -92,7 +94,6 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5111739482787196266, guid: 19f535191901b8f4cadc26f7ebcff86a, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.86709344, y: 0.7, z: 0.28357065}
+  m_Center: {x: 0, y: 0.14654574, z: -0.01284382}

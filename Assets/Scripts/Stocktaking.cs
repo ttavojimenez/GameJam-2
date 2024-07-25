@@ -30,6 +30,7 @@ public class Stocktaking : MonoBehaviour
     private void Update()
     {
         TakeFood();
+        SelectFood();
     }
 
     public bool GetFull()
@@ -48,10 +49,27 @@ public class Stocktaking : MonoBehaviour
             {
                 if (child != obj.transform)
                 {
+                    Debug.Log(child.name);
                     child.gameObject.SetActive(false);
                 }
             }
         }  
+    }
+
+    //Desabilita toda la comida dentro del espacio
+    public void EnableOneChildStock(GameObject obj, int index)
+    {
+        Transform[] childs = obj.GetComponentsInChildren<Transform>(true);
+
+        if (index >= 0 && index < childs.Length)
+        {
+            childs[index].gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("Índice fuera de rango: " + index);
+        }
+
     }
 
     //Añade la comida al inventario
@@ -62,7 +80,28 @@ public class Stocktaking : MonoBehaviour
             if (foods[i] == null)
             {
                 foods[i] = nameFood;
-                foodsStockList[i].SetActive(false);
+
+                if (nameFood.Equals("Banana"))
+                {
+                    EnableOneChildStock(foodsStockList[i], 1);
+                    break;
+                }
+                else if (nameFood.Equals("Apple"))
+                {
+                    EnableOneChildStock(foodsStockList[i], 2);
+                    break;
+                }
+                else if (nameFood.Equals("Watermelon"))
+                {
+                    EnableOneChildStock(foodsStockList[i], 3);
+                    break;
+                }
+                else if (nameFood.Equals("PowerUp"))
+                {
+                    EnableOneChildStock(foodsStockList[i], 4);
+                    break;
+                }
+
                 break;
             }
         }
@@ -73,9 +112,9 @@ public class Stocktaking : MonoBehaviour
     {
         if (!GetFull() && currentFood != null && Input.GetKeyDown(KeyCode.E))
         {
-            Debug.Log("Selecciono la comida: " + currentFood.name);
+            Debug.Log("Selecciono la comida: " + currentFood.tag);
             StartCoroutine(playerController.CoroutineAnim("ItsPicking"));
-            AddFood(currentFood.name);
+            AddFood(currentFood.tag);
             currentFood = null;
         }
     }
@@ -115,8 +154,12 @@ public class Stocktaking : MonoBehaviour
                 currentAnimal = null;
             }
         }
+    }
 
-        //StartCoroutine(CorrutineAnim("ItsDropping"));
+    private void DeleteFood(int keyFood)
+    {
+        foods[keyFood] = null;
+        DisableChildsStock(foodsStockList[keyFood]);
     }
 
     //Entrega la comida al animal
@@ -128,29 +171,35 @@ public class Stocktaking : MonoBehaviour
             {
                 if (foods[keyFood].Equals(typeFoodAnimal))
                 {
-                    Debug.Log("Si tiene la comida");
-                    currentAnimal.ReceiveFood();
+                    if (currentAnimal.isHungry)
+                    {
+                        currentAnimal.ReceiveFood();
+                        DeleteFood(keyFood);
+                    }
                 }
             }
         }
     }
 
-    /*Colisiones y Triggers*/
-    private void OnControllerColliderHit(ControllerColliderHit hit)
+    /*Triggers*/
+    private void OnTriggerEnter(Collider other)
     {
-        if (hit.gameObject.CompareTag("Food"))
+        //PowerUp, Watermelon, Apple, Banana
+        if (other.gameObject.CompareTag("PowerUp") || other.gameObject.CompareTag("Watermelon") || 
+            other.gameObject.CompareTag("Apple") || other.gameObject.CompareTag("Banana"))
         {
-            currentFood = hit.gameObject;
+            currentFood = other.gameObject;
+        }
+
+        if (other.gameObject.CompareTag("Animal"))
+        {
+            currentAnimal = other.gameObject.GetComponent<AnimalController>();
         }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.CompareTag("Animal"))
-        {
-            Debug.Log(other.gameObject.name);
-            currentAnimal = other.gameObject.GetComponent<AnimalController>();
-            currentAnimal.ReceiveFood();
-        }
+        currentFood = null;
+        currentAnimal = null;
     }
 }
